@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcryptjs = require('bcryptjs');
 
-const userSchema = new mongoose.Schema({
+var userSchema = new mongoose.Schema({
     
     email: {
         type: String,
@@ -47,10 +47,9 @@ userSchema.pre('save', function(next){
             if(err){
                 return reject(err);
             }
-            if(!isMatch){
-                return reject(flase);
+            else{
+                return resolve(true);
             } 
-            resolve(true);
         });
 
     });
