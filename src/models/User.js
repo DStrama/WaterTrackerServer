@@ -15,7 +15,6 @@ var userSchema = new mongoose.Schema({
     }
 });
 
-//make sure that we allways salt and hash password when create new user 
 userSchema.pre('save', function(next){
     const user = this;
     if(!user.isModified('password')){
@@ -37,9 +36,7 @@ userSchema.pre('save', function(next){
     
 });
  
-//compare password passed by user with database 
-//we use function to refer to the user
- userSchema.methods.comparePassword = function(tryUserPassword) {
+userSchema.methods.comparePassword = function(tryUserPassword) {
     const user = this;
 
     return new Promise((resolve, reject)=>{
@@ -47,13 +44,13 @@ userSchema.pre('save', function(next){
             if(err){
                 return reject(err);
             }
-            else{
-                return resolve(true);
+            if(!isMatch){
+                return reject(flase);
             } 
+            resolve(true);
         });
 
     });
  }
-
 
 mongoose.model('User', userSchema);

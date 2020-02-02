@@ -1,27 +1,27 @@
-const jwt = require("jsonwebtoken");
-const mongoose = require("mongoose");
-var User = require('../models/User');
+const mongoose = require('mongoose');
+ const jwt = require('jsonwebtoken');
+ const User = mongoose.model('User');
 
-module.exports = (req,res,next) =>{
+ module.exports = (req, res, next) => {
 
-    const {authorization} = req.header;
+ const {authorization} = req.headers;
 
-    if(!authorization){
-        return res.status(401).send({ error: 'You must be logged in'});
-    }
+ if( !authorization ){
+     return res.status(401).send({error: 'you must be logged in.'})
+ }
 
-    const token = authorization.replace("Bearer ","");
-    
-    jwt.verify(token, '', async (err, payload) =>{
-        if(err){
-            return res.status(401).send({ error: 'You must be logged in'});
-        }
+ const token = authorization.replace('Bearer ','');
 
-        const {userId} = payload;
+ jwt.verify(token, 'secret key', async (err, payload)=>{
+     if(err){
+         return res.status(401).send({ error: 'you must be logged'})
+     }
 
-        const user = await User.findById(userId);
-        req.user = user;
-        next();
-    });
+     const { userId } = payload;
 
-};
+     const user = await User.findById(userId);
+     req.user = user;
+     next();
+
+ });
+ };
