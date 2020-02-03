@@ -1,6 +1,6 @@
 const express = require('express');
 const requireAuth = require('../middle/requireAuth');
-var DataController = require('../controllers/dataController');
+const DataController = require('../controllers/dataController');
 const router = express.Router();
 
 router.use(requireAuth);

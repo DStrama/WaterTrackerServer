@@ -39,23 +39,31 @@ exports.postWater = async (req,res)=>{
 };
 
 exports.putWater = async (req,res) =>{ 
+    if(!req.body){
+        return res.status(422).send({error:  'Musisz podac swoje dane.'})
+    }
 
     DaySchema.findByIdAndUpdate({_id: req.params.id},req.body, function(err,Day){
-        if(Day.day.liquid == 'tee'){
-            req.body.day.drunkwater *= 0.9;
+        if(err){
+            return res.status(404).send({error:  'Nie znaleziono uytkownika o tym id.'})
         }
-        else if(Day.day.liquid == 'cofee'){
-            req.body.day.drunkwater *= 0.8;
+        var count;
+        if(req.body.day.liquid == 'tee'){
+            count = req.body.drunkwater * 0.9;
         }
-        else if(Day.day.liquid == 'carbonated'){
-            req.body.day.drunkwater *= 0.89;
+        else if(req.body.liquid == 'cofee'){
+            cont = req.body.drunkwater * 0.8;
         }
-        else if(Day.day.liquid == 'beer'){
-            req.body.day.drunkwater *= 0.9;
+        else if(req.body.liquid == 'carbonated'){
+            count = req.body.drunkwater * 0.89;
+        }
+        else if(req.body.liquid == 'beer'){
+            count = req.body.drunkwater *= 0.9;
         }
         var drunk = req.body.day.drunkwater + Day.day.drunkwater;
         Day.day.drunkwater = drunk;
         res.send(Day);
+
     })
 
 };

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 var DaySchema = new mongoose.Schema({
-    
+
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
@@ -9,7 +9,7 @@ var DaySchema = new mongoose.Schema({
     day:{
         data: {
             type: String,
-            default: '02.05.2005'
+            default: (new Date()).toLocaleDateString()
         },
         drunkwater:{
             type: Number,

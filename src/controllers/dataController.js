@@ -20,14 +20,13 @@ exports.postData = async (req, res) =>{
 
     try{
         if(userData.sex == "male"){
-            userData.requiredwater = parseInt((userData.weight/2.2) * 29.5735296);
-        }
-        else if (userData.sex == "female"){
             userData.requiredwater = parseInt((userData.weight/1.5) * 29.5735296);
         }
-        
-        if(userData.physicalactivity == "true"){
-            userData.requiredwater +=  parseInt(10* 29.5735296);
+        else if (userData.sex == "female"){
+            userData.requiredwater = parseInt((userData.weight/1.8) * 29.5735296);
+        }
+        if(userData.physicalactivity == true){
+            userData.requiredwater =  parseInt(userData.requiredwater + 10* 29.5735296);
         }
 
         const data = new UserData({userData, userId: req.user._id});

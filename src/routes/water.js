@@ -1,6 +1,6 @@
 const express = require('express');
 const requireAuth = require('../middle/requireAuth');
-var WaterController = require('../controllers/waterController');
+const WaterController = require('../controllers/waterController');
 const router = express.Router();
 
 router.use(requireAuth);
