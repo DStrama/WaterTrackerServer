@@ -18,7 +18,7 @@ exports.SignIn = async (req,res) =>{
     //using await because findOne take some time have to connect with mongoDB
     const user = await User.findOne({ email });
     if(!user){
-        return res.statis(422).send({error: 'Nie znaleziono adresu email lub podano błędne hasło'});
+        return res.status(422).send({error: 'Nie znaleziono adresu email lub podano błędne hasło'});
     }
 
     try{

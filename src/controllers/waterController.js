@@ -22,17 +22,26 @@ exports.postWater = async (req,res)=>{
         if(!data.day.liquid || data.day.liquid == 'water' ){
             count = data.day.drunkwater;
         }
+        else if(data.day.liquid == 'mineral water'){
+            count = data.day.drunkwater * 0.93;
+        }
         else if(data.day.liquid == 'tea'){
-            count = data.day.drunkwater * 0.9;
+            count = data.day.drunkwater * 0.85;
         }
         else if(dataday.liquid == 'coffee'){
             count = dataday.drunkwater * 0.8;
         }
-        else if(data.day.liquid == 'carbonated'){
-            count = data.day.drunkwater * 0.89;
+        else if(data.day.liquid == 'soda'){
+            count = data.day.drunkwater * 0.6;
         }
-        else if(data.day.liquid == 'alcohol'){
-            count = data.day.drunkwater * 0.9;
+        else if(data.day.liquid == 'beer'){
+            count = data.day.drunkwater * -0.6;
+        }
+        else if(data.day.liquid == 'strong alcohol'){
+            count = data.day.drunkwater * -3.5;
+        }
+        else if(data.day.liquid == 'wine'){
+            count = data.day.drunkwater * -1.6;
         }
         data.day.liquid = 'water';
         data.day.drunkwater = count;
@@ -58,17 +67,26 @@ exports.putWater = async (req,res) =>{
         if(!req.body.day.liquid || req.body.day.liquid == 'water' ){
             count = req.body.day.drunkwater;
         }
+        else if(req.body.day.liquid == 'mineral water'){
+            count = req.body.day.drunkwater * 0.93;
+        }
         else if(req.body.day.liquid == 'tea'){
-            count = req.body.day.drunkwater * 0.9;
+            count = req.body.day.drunkwater * 0.85;
         }
         else if(req.body.day.liquid == 'coffee'){
             count = req.body.day.drunkwater * 0.8;
         }
-        else if(req.body.day.liquid == 'carbonated'){
-            count = req.body.day.drunkwater * 0.89;
+        else if(req.body.day.liquid == 'soda'){
+            count = req.body.day.drunkwater * 0.6;
         }
-        else if(req.body.day.liquid == 'alcohol'){
-            count = req.body.day.drunkwater * 0.9;
+        else if(req.body.day.liquid == 'beer'){
+            count = req.body.day.drunkwater * -0.6;
+        }
+        else if(req.body.day.liquid == 'strong alcohol'){
+            count = req.body.day.drunkwater * -3.5;
+        }
+        else if(req.body.day.liquid == 'wine'){
+            count = req.body.day.drunkwater * -1.6;
         }
         Day.day.liquid = 'water';
         Day.day.drunkwater = Day.day.drunkwater + count;

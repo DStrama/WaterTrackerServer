@@ -18,7 +18,7 @@ var DaySchema = new mongoose.Schema({
         },
         liquid:{
             type: String,
-            enum:['water','tea','coffee','carbonated','alcohol'],
+            enum:['water','mineral water','wine','beer','strong alcohol','soda','tea','coffee'],
             default: 'water'
         }
     }
