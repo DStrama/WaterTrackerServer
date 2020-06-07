@@ -28,14 +28,14 @@ exports.postWater = async (req,res)=>{
         else if(data.day.liquid == 'tea'){
             count = data.day.drunkwater * 0.85;
         }
-        else if(dataday.liquid == 'coffee'){
-            count = dataday.drunkwater * 0.8;
+        else if(data.day.liquid == 'coffee'){
+            count = data.day.drunkwater * 0.8;
         }
         else if(data.day.liquid == 'soda'){
             count = data.day.drunkwater * 0.6;
         }
         else if(data.day.liquid == 'beer'){
-            count = data.day.drunkwater * -0.6;
+            count = data.day.drunkwater * (-0.6);
         }
         else if(data.day.liquid == 'strong alcohol'){
             count = data.day.drunkwater * -3.5;
@@ -43,6 +43,7 @@ exports.postWater = async (req,res)=>{
         else if(data.day.liquid == 'wine'){
             count = data.day.drunkwater * -1.6;
         }
+        console.log(count);
         data.day.liquid = 'water';
         data.day.drunkwater = count;
         await data.save();
@@ -53,13 +54,13 @@ exports.postWater = async (req,res)=>{
     }
 };
 
-exports.putWater = async (req,res) =>{ 
+exports.putWater = async (req,res) =>{
     if(!req.body){
         return res.status(422).send({error:  'Musisz podac swoje dane.'})
     }
 
     DaySchema.findByIdAndUpdate({_id: req.params.id},req.body, async function(err,Day){
-    
+
         if(err){
             return res.status(404).send({error:  'Nie znaleziono uytkownika o tym id.'})
         }
@@ -97,7 +98,7 @@ exports.putWater = async (req,res) =>{
 
 };
 
-exports.deleteWater =  async (req,res) =>{ 
+exports.deleteWater =  async (req,res) =>{
 
     DaySchema.findByIdAndRemove({_id: req.params.id}).then((Day) => {
         res.send(Day);

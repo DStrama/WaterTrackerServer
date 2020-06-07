@@ -13,8 +13,7 @@ var DaySchema = new mongoose.Schema({
         },
         drunkwater:{
             type: Number,
-            default: 0,
-            min:0
+            default: 0
         },
         liquid:{
             type: String,
