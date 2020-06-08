@@ -7,6 +7,8 @@ router.use(requireAuth);
 
 router.get('/data', requireAuth,DataController.getData )
 
+router.put('/data/:id/', requireAuth,DataController.putData )
+
 router.post('/data', requireAuth,DataController.postData )
 
 module.exports = router;

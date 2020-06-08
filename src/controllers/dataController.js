@@ -3,14 +3,31 @@ const express = require('express');
 var UserData = mongoose.model('UserData');
 var DaySchema = mongoose.model('Day');
 
-exports.getData = async (req, res) =>{
+exports.getData = async (req, res) => {
 
     const data = await UserData.find({ userId: req.user._id });
 
     res.send(data);
 };
 
-exports.postData = async (req, res) =>{
+exports.putData = async (req, res) => {
+
+    UserData.findByIdAndUpdate({_id: req.params.id},req.body, async function(err,User){
+
+        if(err){
+            return res.status(404).send({error:  'Nie znaleziono uzytkownika o tym id.'})
+        }
+
+        User.userData.requiredwater = req.body.userData.requiredwater;
+
+        await User.save();
+        res.send(User);
+    })
+
+
+};
+
+exports.postData = async (req, res) => {
 
     const {userData} = req.body;
 
