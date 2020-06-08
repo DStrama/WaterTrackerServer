@@ -19,6 +19,9 @@ exports.putData = async (req, res) => {
         }
 
         User.userData.requiredwater = req.body.userData.requiredwater;
+        User.userData.sex = User.userData.sex;
+        User.userData.weight = User.userData.weight;
+        User.userData.physicalactivity = User.userData.physicalactivity;
 
         await User.save();
         res.send(User);
