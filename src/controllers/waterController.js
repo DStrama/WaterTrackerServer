@@ -47,7 +47,7 @@ exports.postWater = async (req,res)=>{
         else if(data.day.liquid == 'wine'){
             count = data.day.drunkwater * -1.6;
         }
-        console.log(count);
+
         data.day.liquid = 'water';
         data.day.drunkwater = count;
         await data.save();
