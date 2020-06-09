@@ -19,6 +19,10 @@ exports.postWater = async (req,res)=>{
     try{
         const data = new DaySchema({day, userId: req.user._id});
         var count;
+
+        if(data.day.drunkwater <= 0 ){
+            return res.status(422).send({error:  'Niepoprawne dane.'})
+        }
         if(!data.day.liquid || data.day.liquid == 'water' ){
             count = data.day.drunkwater;
         }
